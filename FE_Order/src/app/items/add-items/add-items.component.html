@@ -1,0 +1,51 @@
+<div class="outer-container">
+  <div class="inner-container">
+      <mat-toolbar-row style="justify-content: center; padding-bottom: 2rem;">
+        <h1>Add Items</h1>
+      </mat-toolbar-row>
+
+    <mat-card class="form-card">
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="itemName">
+          <mat-error *ngIf="itemForm.get('itemName')?.hasError('required')">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Stock</mat-label>
+          <input matInput formControlName="stock">
+          <mat-error *ngIf="itemForm.get('stock')?.hasError('required')">
+            Stock is required
+          </mat-error>
+          <mat-error *ngIf="itemForm.get('stock')?.hasError('pattern')">
+            Enter a valid Stock
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Price</mat-label>
+          <input matInput formControlName="price">
+          <mat-error *ngIf="itemForm.get('price')?.hasError('required')">
+            Price number is required
+          </mat-error>
+          <mat-error *ngIf="itemForm.get('price')?.hasError('pattern')">
+            Enter a valid Price
+          </mat-error>
+        </mat-form-field>
+
+        <div class="button-container">
+          <button mat-raised-button color="primary" mat-button [routerLink]="'/items'" >
+            Back Menu
+          </button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="itemForm.invalid">
+            Add Items
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

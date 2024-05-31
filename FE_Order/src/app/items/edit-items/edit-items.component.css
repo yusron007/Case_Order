@@ -1,0 +1,49 @@
+.outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.inner-container {
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-card {
+  padding: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.custom-file-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.custom-file-input label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.custom-file-input input[type="file"] {
+  display: none;
+}
+
+.custom-file-input span {
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #666;
+}

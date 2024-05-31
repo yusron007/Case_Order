@@ -1,0 +1,81 @@
+<div class="container">
+    <mat-toolbar-row style="justify-content: center; padding-bottom: 2rem;">
+      <h1>Data Items</h1>
+    </mat-toolbar-row>
+
+  <mat-card class="table-card">
+    <div class="table-toolbar">
+      <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput (input)="applyFilter()" [(ngModel)]="searchKey" placeholder="Search by name">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="navigateToAddItem()">Add Items</button>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let items"> {{ items.name }} </td>
+      </ng-container>
+
+      <!-- Code Column -->
+      <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef> Code </th>
+        <td mat-cell *matCellDef="let items"> {{ items.code }} </td>
+      </ng-container>
+
+
+      <!-- Stock Column -->
+      <ng-container matColumnDef="stock">
+        <th mat-header-cell *matHeaderCellDef> Stock </th>
+        <td mat-cell *matCellDef="let items"> {{ items.stock }} </td>
+      </ng-container>
+
+      <!-- Price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let items"> {{ items.price | currency:'Rp ':'symbol':'1.0-0' }} </td>
+      </ng-container>
+
+      <!-- Available Column -->
+      <ng-container matColumnDef="available">
+        <th mat-header-cell *matHeaderCellDef> Available </th>
+        <td mat-cell *matCellDef="let items">
+          <mat-icon color="{{ items.available ? 'primary' : 'warn' }}">
+            {{ items.available ? 'check_circle' : 'cancel' }}
+          </mat-icon>
+        </td>
+      </ng-container>
+
+      <!-- Last Re Stock Column -->
+      <ng-container matColumnDef="lastReStock">
+        <th mat-header-cell *matHeaderCellDef> Last Re Stock </th>
+        <td mat-cell *matCellDef="let items"> {{ items.lastReStock | date: 'medium' }} </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let items">
+          <button mat-icon-button color="primary" (click)="editItem(items.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteItem(items.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="viewItem(items.id)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card>
+  <div class="pagination-container">
+    <mat-paginator [length]="totalElements" [pageSize]="10" [pageSizeOptions]="[10, 20, 50]" (page)="fetchItems($event)"></mat-paginator>
+  </div>
+</div>
+

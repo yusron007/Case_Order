@@ -1,0 +1,46 @@
+<div class="outer-container">
+  <div class="inner-container">
+      <mat-toolbar-row style="justify-content: center; padding-bottom: 2rem;">
+        <h1>Items Details</h1>
+      </mat-toolbar-row>
+
+    <mat-card class="customer-card">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <strong>Name : </strong>
+            <span>{{ item.itemName }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <strong>Code : </strong>
+            <span>{{ item.itemCode }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <strong>Stock : </strong>
+            <span>{{ item.stock }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <strong>Price : </strong>
+            <span>{{ item.price | currency:'Rp ':'symbol':'1.0-0' }} Rupiah </span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <strong>Available : </strong>
+            <span>{{ item.isAvailable ? 'Yes' : 'No' }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <strong>Last Re Stock : </strong>
+            <span>{{ item.lastReStock | date: 'medium' }}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="backToMenu()">Back to Menu</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

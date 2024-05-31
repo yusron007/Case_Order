@@ -1,0 +1,76 @@
+<div class="container">
+    <mat-toolbar-row style="justify-content: center; padding-bottom: 2rem;">
+      <h1>Data Order</h1>
+    </mat-toolbar-row>
+
+  <mat-card class="table-card">
+    <div class="table-toolbar">
+      <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput (input)="applyFilter()" [(ngModel)]="searchKey" placeholder="Search by name">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="navigateToAddOrder()">Add Order</button>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Customer Name Column -->
+      <ng-container matColumnDef="customerName">
+        <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+        <td mat-cell *matCellDef="let order"> {{ order.customerName }} </td>
+      </ng-container>
+
+      <!-- Items Column -->
+      <ng-container matColumnDef="itemsName">
+        <th mat-header-cell *matHeaderCellDef> Items </th>
+        <td mat-cell *matCellDef="let order"> {{ order.itemsName }} </td>
+      </ng-container>
+
+      <!-- Order Code Column -->
+      <ng-container matColumnDef="orderCode">
+        <th mat-header-cell *matHeaderCellDef> Code </th>
+        <td mat-cell *matCellDef="let order"> {{ order.orderCode }} </td>
+      </ng-container>
+
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let order"> {{ order.quantity }} </td>
+      </ng-container>
+
+      <!-- Total Price Column -->
+      <ng-container matColumnDef="totalPrice">
+        <th mat-header-cell *matHeaderCellDef> Total Price </th>
+        <td mat-cell *matCellDef="let order"> {{ order.totalPrice | currency:'Rp ':'symbol':'1.0-0' }} </td>
+      </ng-container>
+
+      <!-- Order Date Column -->
+      <ng-container matColumnDef="orderDate">
+        <th mat-header-cell *matHeaderCellDef> Order Date </th>
+        <td mat-cell *matCellDef="let order"> {{ order.orderDate | date: 'medium' }} </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let order">
+          <button mat-icon-button color="primary" (click)="editOrder(order.orderId)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteOrder(order.orderId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="viewOrder(order.orderId)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card>
+  <div class="pagination-container">
+    <mat-paginator [length]="totalElements" [pageSize]="10" [pageSizeOptions]="[10, 20, 50]" (page)="fetchOrders($event)"></mat-paginator>
+  </div>
+</div>
+

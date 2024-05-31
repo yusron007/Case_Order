@@ -1,0 +1,41 @@
+<div class="outer-container">
+  <div class="inner-container">
+      <mat-toolbar-row style="justify-content: center; padding-bottom: 2rem;">
+        <h1>Customer Details</h1>
+      </mat-toolbar-row>
+
+    <mat-card class="customer-card">
+      <mat-card-header>
+        <div mat-card-avatar class="customer-image">
+          <img [src]="customer.image" alt="Profile Image">
+        </div>
+        <mat-card-title>{{ customer.name }}</mat-card-title>
+        <mat-card-subtitle>{{ customer.code }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-list>
+          <mat-list-item>
+            <strong>Address : </strong>
+            <span>{{ customer.address }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Phone : </strong>
+            <span>{{ customer.phone }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Active : </strong>
+            <span>{{ customer.active ? 'Yes' : 'No' }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Last Order Date : </strong>
+            <span>{{ customer.lastOrderDate | date: 'medium' }}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="backToMenu()">Back to Menu</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

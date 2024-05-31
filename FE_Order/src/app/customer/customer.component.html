@@ -1,0 +1,90 @@
+<div class="container">
+    <mat-toolbar-row style="justify-content: center; padding-bottom: 2rem;">
+      <h1>Data Customer</h1>
+    </mat-toolbar-row>
+
+  <mat-card class="table-card">
+    <div class="table-toolbar">
+      <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput (input)="applyFilter()" [(ngModel)]="searchKey" placeholder="Search by name">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="navigateToAddCustomer()">Add Customer</button>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Image Column -->
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef> Image </th>
+        <td mat-cell *matCellDef="let customer" class="image-cell">
+          <img [src]="customer.image" alt="Profile Image" class="profile-image">
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let customer"> {{ customer.name }} </td>
+      </ng-container>
+
+      <!-- Address Column -->
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <td mat-cell *matCellDef="let customer"> {{ customer.address }} </td>
+      </ng-container>
+
+      <!-- Code Column -->
+      <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef> Code </th>
+        <td mat-cell *matCellDef="let customer"> {{ customer.code }} </td>
+      </ng-container>
+
+      <!-- Phone Column -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let customer"> {{ customer.phone }} </td>
+      </ng-container>
+
+      <!-- Active Column -->
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef> Active </th>
+        <td mat-cell *matCellDef="let customer">
+          <mat-icon color="{{ customer.active ? 'primary' : 'warn' }}">
+            {{ customer.active ? 'check_circle' : 'cancel' }}
+          </mat-icon>
+        </td>
+      </ng-container>
+
+      <!-- Last Order Date Column -->
+      <ng-container matColumnDef="lastOrderDate">
+        <th mat-header-cell *matHeaderCellDef> Last Order Date </th>
+        <td mat-cell *matCellDef="let customer"> {{ customer.lastOrderDate | date: 'medium' }} </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let customer">
+          <button mat-icon-button color="primary" (click)="editCustomer(customer.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteCustomer(customer.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="viewCustomer(customer.id)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card>
+  <div class="pagination-container">
+    <mat-paginator [length]="totalElements" [pageSize]="10" [pageSizeOptions]="[10, 20, 50]" (page)="fetchCustomers($event)">
+    </mat-paginator>
+  </div>
+</div>
+

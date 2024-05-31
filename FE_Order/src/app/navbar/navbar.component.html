@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" style="background: #0a9830; padding: 15px;">
+  <div style="display: flex; justify-content: space-between; width: 100%;">
+    <div style="display: flex; gap: 15px; margin-left: 1rem;">
+      <button mat-button [routerLink]="'/customer'"
+        [ngClass]="{ 'active': isCurrentRoute(['/customer']) }">
+        Customer
+      </button>
+      <button mat-button [routerLink]="'/items'"
+        [ngClass]="{ 'active': isCurrentRoute(['/items']) }">
+        Items
+      </button>
+      <button mat-button [routerLink]="'/order'"
+      [ngClass]="{ 'active': isCurrentRoute(['/order']) }">
+        Order
+      </button>
+    </div>
+    <div style="display: flex; gap: 15px; margin-right: 1rem;">
+      <button mat-raised-button color="primary" (click)="downloadReport()">
+        Report Order
+      </button>
+    </div>
+  </div>
+</mat-toolbar>

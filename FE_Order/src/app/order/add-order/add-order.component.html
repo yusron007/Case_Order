@@ -1,0 +1,56 @@
+<div class="outer-container">
+  <div class="inner-container">
+      <mat-toolbar-row style="justify-content: center; padding-bottom: 2rem;">
+        <h1>Add Order</h1>
+      </mat-toolbar-row>
+
+    <mat-card class="form-card">
+      <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Customer Name</mat-label>
+          <mat-select formControlName="customerId">
+            <mat-option *ngFor="let customer of customers" [value]="customer.customerId">
+              {{ customer.customerName }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="orderForm.get('customerId')?.hasError('required')">
+            Customer is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Items Name</mat-label>
+          <mat-select formControlName="itemsId">
+            <mat-option *ngFor="let item of items" [value]="item.itemsId">
+              {{ item.itemsName }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="orderForm.get('itemsId')?.hasError('required')">
+            Item is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Quantity</mat-label>
+          <input matInput formControlName="quantity">
+          <mat-error *ngIf="orderForm.get('quantity')?.hasError('required')">
+            Quantity is required
+          </mat-error>
+          <mat-error *ngIf="orderForm.get('quantity')?.hasError('pattern')">
+            Enter a valid Quantity
+          </mat-error>
+        </mat-form-field>
+
+        <div class="button-container">
+          <button mat-raised-button color="primary" mat-button [routerLink]="'/order'" >
+            Back Menu
+          </button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="orderForm.invalid">
+            Add Order
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

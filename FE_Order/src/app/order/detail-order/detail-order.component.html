@@ -1,0 +1,67 @@
+<div class="outer-container">
+  <div class="inner-container">
+      <mat-toolbar-row style="justify-content: center; padding-bottom: 2rem;">
+        <h1>Order Details</h1>
+      </mat-toolbar-row>
+
+    <mat-card class="customer-card">
+      <mat-card-content>
+
+        <!-- Customer -->
+        <h3 style="text-align: center;">CUSTOMER</h3>
+        <mat-list>
+          <mat-list-item>
+            <strong>Customer Name : </strong>
+            <span>{{ order.customer.customerName }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Customer Address : </strong>
+            <span>{{ order.customer.customerAddress }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Customer Phone : </strong>
+            <span>{{ order.customer.customerPhone }}</span>
+          </mat-list-item>
+        </mat-list>
+        <mat-divider></mat-divider>
+
+        <!-- Items -->
+        <h3 style="text-align: center; margin-top: 1rem;" > ITEM</h3>
+        <mat-list>
+          <mat-list-item>
+            <strong>Item Name : </strong>
+            <span>{{ order.items.itemsName }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Price : </strong>
+            <span>{{ order.items.price | currency:'Rp ':'symbol':'1.0-0' }}</span>
+          </mat-list-item>
+        </mat-list>
+        <mat-divider></mat-divider>
+
+        <!-- Order -->
+        <mat-list>
+          <mat-list-item>
+            <strong>Order Code : </strong>
+            <span>{{ order.orderCode }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Order Date : </strong>
+            <span>{{ order.orderDate | date: 'medium' }} </span>
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Quantity : </strong>
+            <span>{{ order.quantity }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <strong>Total Price : </strong>
+            <span>{{ order.totalPrice | currency:'Rp ':'symbol':'1.0-0' }}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="backToMenu()">Back to Menu</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
